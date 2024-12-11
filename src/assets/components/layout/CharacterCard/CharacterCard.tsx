@@ -4,6 +4,7 @@ import './CharacterCard.scss';
 const CharacterCard = ({ name, status, gender, image, location }: CharactersProps) => {
 
     let statusText = '';
+    let genderText = "";
 
     // Switch ifadesini burada kullanarak statusText değerini belirleyelim
     switch (status) {
@@ -21,15 +22,25 @@ const CharacterCard = ({ name, status, gender, image, location }: CharactersProp
             break;
     }
 
-    let genderText = "";
-    switch (gender) {
-        case "Male":
-            genderText = "Erkek";
-            return 0;
-        case "Female":
-            genderText = "Kadın";
-            return 0;
+    const genderCondition = () => {
+        switch (gender) {
+            case "Male":
+                genderText = "Erkek";
+                return 0;
+            case "Female":
+                genderText = "Kadın";
+                return 0;
+
+            case "genderless":
+                genderText = "Cinsiyetsiz";
+                return 0;
+            default:
+                genderText = "Bilinmiyor";
+                return 0;
+        }
     }
+    genderCondition();
+
 
     return (
         <div className='card'>
@@ -42,7 +53,7 @@ const CharacterCard = ({ name, status, gender, image, location }: CharactersProp
                     <span className="h-2 status-color rounded-full bg-success"></span>
                     <span>{statusText}</span>
                 </div>
-                <h6 className='character-gender'>{gender}</h6>
+                <h6 className='character-gender'>{genderText}</h6>
                 <h6 className='character-location'>{location.name}</h6>
             </div>
         </div>
