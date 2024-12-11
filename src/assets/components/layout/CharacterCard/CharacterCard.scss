@@ -12,12 +12,13 @@
         position: relative;
         overflow: hidden;
         padding: 0px !important;
-    }
+        height: 360px !important;
 
-    .character-image {
-        width: 100% !important;
-        height: 100% !important;
-        transition: transform 0.3s ease-out;
+        .character-image {
+            width: 100% !important;
+            height: 100% !important;
+            transition: transform 0.3s ease-out;
+        }
     }
 
     &:hover {
@@ -27,6 +28,13 @@
             transform: scale(1.1);
             cursor: pointer;
         }
+    }
+
+    .status-color {
+        background-color: green;
+        width: 15px !important;
+        height: 15px !important;
+        border-radius: 50%;
     }
 
 }

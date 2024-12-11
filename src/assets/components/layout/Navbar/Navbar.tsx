@@ -6,7 +6,7 @@ const NavbarComp = () => {
     return (
         <Navbar expand="lg" className="bg-dark">
             <Container>
-                <Navbar.Brand href="#home" className="text-light">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand href="#home" className="text-light">Rick And Morty</Navbar.Brand>
                 <Navbar.Toggle className="bg-secondary" aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">

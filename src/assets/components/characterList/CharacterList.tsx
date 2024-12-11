@@ -19,7 +19,6 @@ const CharacterList = () => {
     }
 
 
-
     return <>
         <Container>
             <Row className="d-flex justify-content-center">
