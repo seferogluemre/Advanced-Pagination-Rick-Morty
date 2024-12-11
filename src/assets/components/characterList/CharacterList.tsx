@@ -5,7 +5,7 @@ import Card from '../layout/CharacterCard/CharacterCard'
 
 const CharacterList = () => {
 
-    const { data, error, loading } = useFetch<{ results: CharactersProps[] }>('https://rickandmortyapi.com/api/character');
+    const { data, error, loading, pageCount } = useFetch<{ results: CharactersProps[] }>('https://rickandmortyapi.com/api/character');
 
     if (error) {
         return (

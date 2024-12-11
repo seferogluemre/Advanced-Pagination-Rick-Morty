@@ -4,6 +4,7 @@ const useFetch = <T,>(url: string) => {
 
     const [data, setData] = useState<T | []>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [pageCount, setPageCount] = useState<number>(1);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -13,7 +14,10 @@ const useFetch = <T,>(url: string) => {
                 const response = await fetch(url);
                 const dataJson = await response.json();
                 setData(dataJson);
-                console.log(dataJson)
+                // Sayfa sayısını dataJson içinden info.pages alarak set ediyoruz
+                if (dataJson.info && dataJson.info.pages) {
+                    setPageCount(dataJson.info.pages);
+                }
                 setLoading(false);
             } catch (error) {
                 setError((error as Error).message);
@@ -27,7 +31,7 @@ const useFetch = <T,>(url: string) => {
 
     }, [url])
 
-    return { error, loading, data };
+    return { error, loading, data, pageCount };
 }
 
 export default useFetch;
