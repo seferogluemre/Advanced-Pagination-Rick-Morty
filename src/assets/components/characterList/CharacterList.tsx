@@ -1,17 +1,34 @@
-import { Alert, Button, Container, Row } from "react-bootstrap";
+import { Alert, Button, Container, Row, Form } from "react-bootstrap";
 import useFetch from "../../hooks/useFetch";
 import CharactersProps from "../types/Characters";
 import Card from "../layout/CharacterCard/CharacterCard";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const CharacterList = () => {
+  const { register } = useForm<{ search: string; gender: string }>();
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [genderFilter, setGenderFilter] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>("");
   const { data, error, loading, pageCount } = useFetch<{
     results: CharactersProps[];
   }>(`https://rickandmortyapi.com/api/character?page=${currentPage}`);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setGenderFilter(e.target.value);
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setStatusFilter(e.target.value);
   };
 
   if (error) {
@@ -25,11 +42,53 @@ const CharacterList = () => {
     return <div>Yükleniyor.........</div>;
   }
 
+  const filteredData = data?.results.filter(
+    (character: CharactersProps) =>
+      (genderFilter ? character.gender === genderFilter : true) &&
+      (searchTerm
+        ? character.name.toLowerCase().includes(searchTerm.toLowerCase())
+        : true) &&
+      (statusFilter ? character.status === statusFilter : true)
+  );
+
   return (
     <>
       <Container>
+        <Row className="search-form-row">
+          <Form className="d-flex justify-content-center row-gap-4 text-white align-items-center flex-column">
+            <label>Karakter arama</label>
+            <input
+              type="text"
+              className="bg-dark w-50 search-input form-control text-white"
+              style={{ border: "none" }}
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+            <Form className="d-flex justify-content-center text-white column-gap-5 align-items-center">
+              <Form.Group controlId="genderFilter">
+                <Form.Label>Cinsiyet Filtrele</Form.Label>
+                <Form.Control as="select" onChange={handleGenderChange}>
+                  <option value="">Hepsi</option>
+                  <option value="Male">Erkek</option>
+                  <option value="Female">Kadın</option>
+                  <option value="Genderless">Cinsiyetsiz</option>
+                  <option value="Unknown">Bilinmiyor</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="statusFilter">
+                <Form.Label>Durum Filtrele</Form.Label>
+                <Form.Control as="select" onChange={handleStatusChange}>
+                  <option value="">Hepsi</option>
+                  <option value="Alive">Canlı</option>
+                  <option value="Dead">Ölü</option>
+                  <option value="unknown">Bilinmiyor</option>
+                </Form.Control>
+              </Form.Group>
+            </Form>
+          </Form>
+        </Row>
         <Row className="d-flex justify-content-center">
-          {data?.results.map((character: CharactersProps) => (
+          {filteredData?.map((character: CharactersProps) => (
             <div
               className="col-xxl-3 col-lg-4 col-md-6 col-sm-12"
               key={character.id}
