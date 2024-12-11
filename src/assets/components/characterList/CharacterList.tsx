@@ -11,6 +11,7 @@ const CharacterList = () => {
   const [genderFilter, setGenderFilter] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("");
+
   const { data, error, loading, pageCount } = useFetch<{
     results: CharactersProps[];
   }>(`https://rickandmortyapi.com/api/character?page=${currentPage}`);
@@ -65,7 +66,7 @@ const CharacterList = () => {
               onChange={handleSearchChange}
             />
             <Form className="d-flex justify-content-center text-white column-gap-5 align-items-center">
-              <Form.Group controlId="genderFilter">
+              <Form.Group controlId="genderFilter" style={{ width: "400px" }}>
                 <Form.Label>Cinsiyet Filtrele</Form.Label>
                 <Form.Control as="select" onChange={handleGenderChange}>
                   <option value="">Hepsi</option>
@@ -75,7 +76,7 @@ const CharacterList = () => {
                   <option value="Unknown">Bilinmiyor</option>
                 </Form.Control>
               </Form.Group>
-              <Form.Group controlId="statusFilter">
+              <Form.Group controlId="statusFilter" style={{ width: "400px" }}>
                 <Form.Label>Durum Filtrele</Form.Label>
                 <Form.Control as="select" onChange={handleStatusChange}>
                   <option value="">Hepsi</option>
