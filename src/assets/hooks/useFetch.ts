@@ -14,6 +14,7 @@ const useFetch = (url: string) => {
                 const response = await fetch(url);
                 const dataJson = await response.json();
                 setData(dataJson);
+                console.log(dataJson)
                 setLoading(false);
             } catch (error) {
                 setError((error as Error).message);
@@ -23,6 +24,7 @@ const useFetch = (url: string) => {
                 setLoading(false);
             }
         }
+        getFetchData();
 
     }, [url])
 
