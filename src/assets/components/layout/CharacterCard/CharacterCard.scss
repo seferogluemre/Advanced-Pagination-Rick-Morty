@@ -1,0 +1,32 @@
+.card {
+    background-color: rgb(51, 50, 50) !important;
+    color: aliceblue !important;
+    width: 300px !important;
+    height: 480px !important;
+    margin: 20px auto;
+    border: 1px solid rgb(1, 1, 44) !important;
+    transition: 0.3 s ease-out !important;
+    cursor: pointer;
+
+    .card-header {
+        position: relative;
+        overflow: hidden;
+        padding: 0px !important;
+    }
+
+    .character-image {
+        width: 100% !important;
+        height: 100% !important;
+        transition: transform 0.3s ease-out;
+    }
+
+    &:hover {
+        border: 1px solid green !important;
+
+        .character-image {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+
+}

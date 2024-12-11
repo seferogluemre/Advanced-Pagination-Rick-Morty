@@ -25,7 +25,7 @@ const CharacterList = () => {
             <Row className="d-flex justify-content-center">
                 {
                     data?.results.map((character: CharactersProps) => (
-                        <div className="col-lg-3 col-md-4 col-sm-12" key={character.id}>
+                        <div className="col-xxl-3 col-lg-4  col-md-6 col-sm-12" key={character.id}>
                             <Card
                                 image={character.image}
                                 name={character.name}
