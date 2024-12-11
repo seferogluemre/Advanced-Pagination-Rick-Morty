@@ -31,7 +31,7 @@ const CharacterList = () => {
         <Row className="d-flex justify-content-center">
           {data?.results.map((character: CharactersProps) => (
             <div
-              className="col-xxl-3 col-lg-4  col-md-6 col-sm-12"
+              className="col-xxl-3 col-lg-4 col-md-6 col-sm-12"
               key={character.id}
             >
               <Card
@@ -44,16 +44,38 @@ const CharacterList = () => {
             </div>
           ))}
         </Row>
-        <Row className="d-flex justify-content-center flex-row">
-          {Array.from({ length: pageCount }, (_, index) => (
-            <Button
-              key={index + 1}
-              onClick={() => handlePageChange(index + 1)}
-              className="mx-1"
-            >
-              {index + 1}
-            </Button>
-          ))}
+        <Row className="d-flex justify-content-center">
+          <div className="pagination">
+            {currentPage > 1 && (
+              <Button
+                onClick={() => handlePageChange(currentPage - 1)}
+                className="mx-1"
+              >
+                &lt;
+              </Button>
+            )}
+            {Array.from({ length: pageCount }, (_, index) =>
+              index + 1 >= currentPage - 1 && index + 1 <= currentPage + 1 ? (
+                <Button
+                  key={index + 1}
+                  className={`mx-1 ${
+                    currentPage === index + 1 ? "active" : ""
+                  }`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </Button>
+              ) : null
+            )}
+            {currentPage < pageCount && (
+              <Button
+                onClick={() => handlePageChange(currentPage + 1)}
+                className="mx-1"
+              >
+                &gt;
+              </Button>
+            )}
+          </div>
         </Row>
       </Container>
     </>
