@@ -63,8 +63,8 @@ const CharacterList = () => {
             Çoklu evrenleri keşfet ve favori karakterlerini bul
           </p>
         </div>
-        <Row className="search-form-row">
-          <Form className="d-flex justify-content-center row-gap-4 text-white align-items-center flex-column">
+        <Row className="row">
+          <Form className="d-flex form justify-content-center row-gap-4 text-white align-items-center flex-column">
             <label>Karakter arama</label>
             <input
               type="text"
@@ -73,8 +73,12 @@ const CharacterList = () => {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <Form className="d-flex justify-content-center text-white column-gap-5 align-items-center">
-              <Form.Group controlId="genderFilter" style={{ width: "400px" }}>
+            <Form className="d-flex justify-content-center text-white column-gap-5 align-items-center filter-form">
+              <Form.Group
+                className="control"
+                controlId="genderFilter"
+                style={{ width: "400px" }}
+              >
                 <Form.Label>Cinsiyet Filtrele</Form.Label>
                 <Form.Control as="select" onChange={handleGenderChange}>
                   <option value="">Hepsi</option>
@@ -84,7 +88,11 @@ const CharacterList = () => {
                   <option value="Unknown">Bilinmiyor</option>
                 </Form.Control>
               </Form.Group>
-              <Form.Group controlId="statusFilter" style={{ width: "400px" }}>
+              <Form.Group
+                className="control"
+                controlId="statusFilter"
+                style={{ width: "400px" }}
+              >
                 <Form.Label>Durum Filtrele</Form.Label>
                 <Form.Control as="select" onChange={handleStatusChange}>
                   <option value="">Hepsi</option>
