@@ -55,6 +55,14 @@ const CharacterList = () => {
   return (
     <>
       <Container>
+        <div className="text-center my-5">
+          <h2 className="gradient-title" style={{ color: "yellow" }}>
+            Rick Ve Morty Karakterleri
+          </h2>
+          <p className="fs-6 text-white py-3">
+            Çoklu evrenleri keşfet ve favori karakterlerini bul
+          </p>
+        </div>
         <Row className="search-form-row">
           <Form className="d-flex justify-content-center row-gap-4 text-white align-items-center flex-column">
             <label>Karakter arama</label>
@@ -105,7 +113,7 @@ const CharacterList = () => {
           ))}
         </Row>
         <Row className="d-flex justify-content-center">
-          <div className="pagination">
+          <div className="pagination d-flex justify-content-center">
             {currentPage > 1 && (
               <Button
                 onClick={() => handlePageChange(currentPage - 1)}
