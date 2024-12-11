@@ -6,5 +6,5 @@ export default interface CharactersProps {
     gender: string;
     location: {
         name: string;
-    }[];
+    };
 }
